@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dbWeb.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class Crud<T> : Controller, IDisposable where T : BaseModel
     {
         private readonly DbContext _context;
@@ -21,7 +19,6 @@ namespace dbWeb.Controllers
             _context = new DbContext(new DbContextOptions<DbContext>());
         }
 
-        [HttpGet]
         public List<T> GetAll()
         {
             return _context.Set<T>().ToList();
@@ -32,14 +29,12 @@ namespace dbWeb.Controllers
             return Ok(await _context.Set<T>().ToListAsync());
         }
 
-        [HttpPost]
         public virtual void Insert(T entity)
         {
             _context.Set<T>().Add(entity);
             _context.SaveChanges();
         }
 
-        [HttpPut]
         public virtual void Update(T entity)
         {
             var dbEntity = _context.Set<T>().Find(entity.Id);
@@ -52,7 +47,6 @@ namespace dbWeb.Controllers
             _context.SaveChanges();
         }
 
-        [HttpDelete]
         public virtual void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);

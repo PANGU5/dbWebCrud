@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dbWeb.Data;
 
@@ -10,9 +11,11 @@ using dbWeb.Data;
 namespace dbWeb.Migrations
 {
     [DbContext(typeof(DatabaseAPIContext))]
-    partial class ContactsAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230520162545_init7")]
+    partial class init7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,11 +46,11 @@ namespace dbWeb.Migrations
 
             modelBuilder.Entity("dbWeb.Models.Person", b =>
                 {
-                    b.Property<int>("PersonID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FirstMidName")
                         .IsRequired()
@@ -57,7 +60,7 @@ namespace dbWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PersonID");
+                    b.HasKey("Id");
 
                     b.ToTable("Person", (string)null);
                 });
