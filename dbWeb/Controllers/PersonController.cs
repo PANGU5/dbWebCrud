@@ -10,18 +10,18 @@ namespace dbWeb.Controllers
     public class PersonController : Controller
     {
         private readonly DatabaseAPIContext _context;
-        //private Crud<Person> _crudPerson = new Crud<Person>();
+        private Crud<Person> _crudPerson = new Crud<Person>();
 
         public PersonController(DatabaseAPIContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet]     
+        public async Task<IActionResult> Get() //    <------------ ОШИБКА ЕСЛИ ВЫЗВАТЬ ЭТОТ МЕТОД
         {
-            return Ok(await _context.Persons.ToListAsync());
-            //return await _crudPerson.Get();
+            //return Ok(await _context.Persons.ToListAsync());
+            return await _crudPerson.Get(); 
         }
 
         [HttpGet]
